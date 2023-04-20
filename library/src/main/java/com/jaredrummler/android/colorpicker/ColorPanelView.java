@@ -140,18 +140,20 @@ public class ColorPanelView extends View {
       }
       canvas.drawRect(colorRect, colorPaint);
     } else if (shape == ColorShape.CIRCLE) {
-      final int outerRadius = getMeasuredWidth() / 2;
+      final int width = getMeasuredWidth();
+      final int height = getMeasuredHeight();
+      final int outerRadius = (width - getPaddingTop() - getPaddingBottom()) / 2;
       if (borderWidthPx > 0) {
-        canvas.drawCircle(getMeasuredWidth() / 2, getMeasuredHeight() / 2, outerRadius, borderPaint);
+        canvas.drawCircle(width / 2, height / 2, outerRadius, borderPaint);
       }
       if (Color.alpha(color) < 255) {
-        canvas.drawCircle(getMeasuredWidth() / 2, getMeasuredHeight() / 2, outerRadius - borderWidthPx, alphaPaint);
+        canvas.drawCircle(width / 2, height / 2, outerRadius - borderWidthPx, alphaPaint);
       }
       if (showOldColor) {
         canvas.drawArc(centerRect, 90, 180, true, originalPaint);
         canvas.drawArc(centerRect, 270, 180, true, colorPaint);
       } else {
-        canvas.drawCircle(getMeasuredWidth() / 2, getMeasuredHeight() / 2, outerRadius - borderWidthPx, colorPaint);
+        canvas.drawCircle(width / 2, height / 2, outerRadius - borderWidthPx, colorPaint);
       }
     }
   }
