@@ -1,20 +1,39 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 
 android {
-  compileSdkVersion buildConfig.compileSdk
-  resourcePrefix "cpv_"
-  defaultConfig {
-    minSdkVersion buildConfig.minSdk
-    targetSdkVersion buildConfig.targetSdk
-  }
-  lintOptions {
-    abortOnError false
-  }
+    compileSdkVersion buildConfig.compileSdk
+    resourcePrefix "cpv_"
+    defaultConfig {
+        minSdkVersion buildConfig.minSdk
+        targetSdkVersion buildConfig.targetSdk
+    }
+    lintOptions {
+        abortOnError false
+    }
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
-  implementation deps.androidx.appCompat
-  implementation deps.androidx.preferences
+    implementation deps.androidx.appCompat
+    implementation deps.androidx.preferences
 }
 
-apply from: rootProject.file('gradle/maven-push.gradle')
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = 'com.github.TheBeastLT'
+            artifactId = 'ColorPicker'
+            version = '1.2.0'
+
+            afterEvaluate {
+                from components.release
+            }
+        }
+    }
+}

@@ -1,42 +1,40 @@
 buildscript {
 
-  // @formatter:off
-  ext.buildConfig = [
-      compileSdk   : 30,
-      targetSdk    : 30,
-      minSdk       : 14,
-      gradlePlugin : '4.0.0'
-  ]
-  ext.versions = [
-      androidx      : '1.1.0',
-      preferences   : '1.1.1'
-  ]
-  ext.deps = [
-    'androidx' : [
-      'appCompat'   : "androidx.appcompat:appcompat:${versions.androidx}",
-      'preferences' : "androidx.preference:preference:${versions.preferences}"
+    ext.buildConfig = [
+            compileSdk  : 33,
+            targetSdk   : 33,
+            minSdk      : 14,
+            gradlePlugin: '7.2.2'
     ]
-  ]
-  // @formatter:on
+    ext.versions = [
+            androidx   : '1.1.0',
+            preferences: '1.1.1'
+    ]
+    ext.deps = [
+            'androidx': [
+                    'appCompat'  : "androidx.appcompat:appcompat:${versions.androidx}",
+                    'preferences': "androidx.preference:preference:${versions.preferences}"
+            ]
+    ]
 
-  repositories {
-    google()
-    mavenCentral()
-    jcenter()
-  }
-  dependencies {
-    classpath "com.android.tools.build:gradle:${buildConfig.gradlePlugin}"
-  }
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:${buildConfig.gradlePlugin}"
+    }
 }
 
 allprojects {
-  repositories {
-    google()
-    mavenCentral()
-    jcenter()
-  }
+    repositories {
+        google()
+        mavenCentral()
+        jcenter()
+    }
 }
 
 task clean(type: Delete) {
-  delete rootProject.buildDir
+    delete rootProject.buildDir
 }
